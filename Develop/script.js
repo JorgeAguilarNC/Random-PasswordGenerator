@@ -1,8 +1,8 @@
 var characterlength = 8;
 var choiceArray = [];
 
-var uppercaseArray =
-  ("A",
+var uppercaseArray = [
+  "A",
   "B",
   "C",
   "D",
@@ -27,9 +27,10 @@ var uppercaseArray =
   "W",
   "X",
   "Y",
-  "Z");
-var lowercaseArray =
-  ("a",
+  "Z",
+];
+var lowercaseArray = [
+  "a",
   "b",
   "c",
   "d",
@@ -54,13 +55,27 @@ var lowercaseArray =
   "w",
   "x",
   "y",
-  "z");
-var numberArray = ("0", "1", "2", "3", "4", "5", "6", "7", "8", "9");
-var characterArray =
-  ("!", "@", "$", "%", "^", "&", "*", "!", "?", "#", "_", "=", "+");
+  "z",
+];
+var numberArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+var characterArray = [
+  "!",
+  "@",
+  "$",
+  "%",
+  "^",
+  "&",
+  "*",
+  "!",
+  "?",
+  "#",
+  "_",
+  "=",
+  "+",
+];
 
 // Assignment code here}
-generateBtn = document.quierySelector("generate");
+var generateBtn = document.querySelector("#generate");
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
@@ -68,31 +83,14 @@ generateBtn.addEventListener("click", writePassword);
 // Write password to the #password input
 function writePassword() {
   var correctPrompts = getPrompts();
-  var passwordText = document.querySelector("#password");
+}
 
-  if (correctPrompts) {
-    var newPassword = generatePassword();
-    passwordText.value = newPassword;
-  } else {
-    passwordText.value = "";
-  }
-}
-function generatePassword() {
-  //Generate Password based on the prompts
-  var password = "";
-  // STING IS NOT WORKING**
-  for (var i = 0; 1 < characterlength; i++) {
-    var randomIndex = math.floor(math.random() * choiceArray.length);
-    password = password + choiceArray[randomIndex];
-  }
-  return password;
-}
 function getPrompts() {
   choiceArray = [];
 
-  CharacterLength = parseInt(prompt("Please choose 8 to 128 characters")); //NAN
+  var characterLength = parseInt(prompt("Please choose 8 to 128 characters")); //NAN
 
-  if (isNaN(CharacterLength) || CharacterLength < 8 || CharacterLength > 128) {
+  if (isNaN(characterLength) || characterLength < 8 || characterLength > 128) {
     alert(
       "Character length has to be a number, 8 - 128 digits. Please try again. "
     );
@@ -100,16 +98,34 @@ function getPrompts() {
   }
 
   if (confirm("Would you like to Add Lower Case Letters in your password?")) {
-    choiceArray = characterArray.concat(lowerCaseArray);
+    choiceArray = characterArray.concat(lowercaseArray);
   }
   if (confirm("Would you like to Add Upper Case Letters in your password?")) {
-    choiceArray = characterArray.concat(upperCaseArray);
+    choiceArray = characterArray.concat(uppercaseArray);
   }
   if (confirm("Would you like to Add Numbers in your password?")) {
     choiceArray = characterArray.concat(numberArray);
   }
   if (confirm("Would you like to Add special characters in your password?")) {
-    choiceArray = characterArray.concat(specialcharacterArray);
+    choiceArray = characterArray.concat(characterArray);
   }
-  return true;
+  generatePassword(choiceArray, characterLength);
+}
+
+function generatePassword(choiceArray, characterLength) {
+  //Generate Password based on the prompts
+  console.log(choiceArray);
+  console.log(characterLength);
+  var password = [];
+  // STING IS NOT WORKING**
+  for (var i = 0; i < characterLength; i++) {
+    var randomIndex = Math.floor(Math.random() * choiceArray.length);
+    var makePassword = choiceArray[randomIndex];
+    password.push(makePassword);
+  }
+  // return password;
+  var finalPassword = password.join("");
+  var passwordText = document.querySelector("#password");
+
+  passwordText.value = finalPassword;
 }
