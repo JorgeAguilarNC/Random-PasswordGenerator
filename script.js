@@ -98,16 +98,16 @@ function getPrompts() {
   }
 
   if (confirm("Would you like to Add Lower Case Letters in your password?")) {
-    choiceArray = characterArray.concat(lowercaseArray);
+    choiceArray = choiceArray.concat(lowercaseArray);
   }
   if (confirm("Would you like to Add Upper Case Letters in your password?")) {
-    choiceArray = characterArray.concat(uppercaseArray);
+    choiceArray = choiceArray.concat(uppercaseArray);
   }
   if (confirm("Would you like to Add Numbers in your password?")) {
-    choiceArray = characterArray.concat(numberArray);
+    choiceArray = choiceArray.concat(numberArray);
   }
   if (confirm("Would you like to Add special characters in your password?")) {
-    choiceArray = characterArray.concat(characterArray);
+    choiceArray = choiceArray.concat(characterArray);
   }
   generatePassword(choiceArray, characterLength);
 }
@@ -117,7 +117,6 @@ function generatePassword(choiceArray, characterLength) {
   console.log(choiceArray);
   console.log(characterLength);
   var password = [];
-  // STING IS NOT WORKING**
   for (var i = 0; i < characterLength; i++) {
     var randomIndex = Math.floor(Math.random() * choiceArray.length);
     var makePassword = choiceArray[randomIndex];
